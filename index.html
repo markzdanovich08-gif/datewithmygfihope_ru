@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff4ec">
+  <title>Кошка, пойдёшь со мной? 💗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main id="app" class="app-shell">
+    <section class="screen screen-intro active" data-screen="intro" aria-labelledby="intro-title">
+      <div class="photo-collage" aria-hidden="true">
+        <div class="photo-tile tile-one"></div><div class="photo-tile tile-two"></div>
+        <div class="photo-tile tile-three"></div><div class="photo-tile tile-four"></div>
+      </div>
+      <div class="intro-overlay"></div>
+      <div class="sticker sticker-one" aria-hidden="true">💌</div>
+      <div class="sticker sticker-two" aria-hidden="true">🐈</div>
+      <div class="sticker sticker-three" aria-hidden="true">✨</div>
+      <div class="intro-content">
+        <span class="eyebrow">маленькое письмо для тебя</span>
+        <h1 id="intro-title">Я знаю, что сейчас всё сложно,<br>но дай мне шанс...</h1>
+        <p class="soft-copy">Без спешки. Просто один тёплый вечер вместе.</p>
+        <button class="button button-primary pulse" data-go="question">Продолжить <span aria-hidden="true">→</span></button>
+      </div>
+      <span class="photo-note">наши будущие воспоминания ♡</span>
+    </section>
+
+    <section class="screen" data-screen="question" aria-labelledby="question-title">
+      <div class="mini-heart" aria-hidden="true">♡</div>
+      <span class="eyebrow">важный вопрос</span>
+      <h1 id="question-title">Кошка, пойдёшь ли ты<br class="desktop-break"> со мной на свидание?</h1>
+      <p class="lead">Обещаю, что в этот раз мы будем спорить только о том, куда пойти первым делом.</p>
+      <div class="question-actions" id="question-actions">
+        <button class="button button-primary yes-button" id="yes-button" disabled>Да 💗</button>
+        <button class="button button-quiet no-button" id="no-button" aria-label="Нет, не хочу">Нет 🙈</button>
+      </div>
+      <p class="tiny-note" id="question-note" aria-live="polite">Кнопка «Да» появится через 5 секунд ✨</p>
+    </section>
+
+    <section class="screen" data-screen="places" aria-labelledby="places-title">
+      <div class="screen-heading">
+        <span class="eyebrow">шаг 1 из 3</span>
+        <h1 id="places-title">Выбор локации</h1>
+        <p class="lead">Кошка, просто зажми левой кнопкой мыши карточку и перетащи её. Выстрой список, поставив самое желанное место на первое место.</p>
+        <p class="micro-copy">На телефоне тоже можно перетаскивать карточки. Топ-3 попадут в открытку.</p>
+      </div>
+      <ol id="places-list" class="places-list" aria-label="Перетащи места, чтобы изменить порядок"></ol>
+      <div class="sticky-actions">
+        <span class="step-hint">♡ Выбери порядок сердцем</span>
+        <button class="button button-primary" data-go="schedule">Выбрать дату и время →</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="schedule" aria-labelledby="schedule-title">
+      <div class="screen-heading">
+        <span class="eyebrow">шаг 2 из 3</span>
+        <h1 id="schedule-title">Когда сбежим от суеты?</h1>
+        <p class="lead">Выбери день, а потом настроение нашего вечера.</p>
+      </div>
+      <div class="planner-grid">
+        <article class="glass-card calendar-card">
+          <div class="calendar-top">
+            <button class="icon-button" id="prev-month" aria-label="Предыдущий месяц">‹</button>
+            <h2 id="month-label">Месяц год</h2>
+            <button class="icon-button" id="next-month" aria-label="Следующий месяц">›</button>
+          </div>
+          <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+          <div id="calendar-days" class="calendar-days" aria-label="Выбери дату"></div>
+          <p id="date-help" class="micro-copy">Доступны даты начиная с сегодняшнего дня.</p>
+        </article>
+        <article id="time-card" class="glass-card time-card mood-day">
+          <span class="eyebrow">наше время</span>
+          <div id="time-icon" class="time-icon" aria-hidden="true">🌤️</div>
+          <div class="time-display"><span id="time-label">16:00</span><span id="time-period">дневное тепло</span></div>
+          <input id="time-slider" type="range" min="8" max="22" step="1" value="16" aria-label="Выбери время">
+          <div class="range-labels"><span>☀️ 08:00</span><span>🌤️ 15:00</span><span>🌙 22:00</span></div>
+          <p class="micro-copy">Передвигай ползунок — атмосфера будет меняться вместе со временем.</p>
+        </article>
+      </div>
+      <div class="sticky-actions">
+        <button class="button button-quiet" data-go="places">← Назад</button>
+        <button class="button button-primary" id="to-card">Собрать открытку →</button>
+      </div>
+      <p id="schedule-error" class="form-error" role="alert"></p>
+    </section>
+
+    <section class="screen postcard-screen" data-screen="postcard" aria-labelledby="postcard-title">
+      <span class="eyebrow">шаг 3 из 3 · почти готово</span>
+      <h1 id="postcard-title">Открытка для Кошки</h1>
+      <article class="postcard">
+        <div class="postcard-stamp" aria-hidden="true">♡</div>
+        <div class="postcard-topline">SAVE A LITTLE DATE</div>
+        <div class="postcard-art" aria-hidden="true"><span>🌷</span><span>☁️</span><span>💗</span></div>
+        <p class="postcard-intro">Наш маленький план</p>
+        <h2>Три места, три повода улыбнуться</h2>
+        <ol id="summary-places" class="summary-places"></ol>
+        <div class="summary-divider"></div>
+        <div class="summary-detail"><span>📅</span><div><small>Дата</small><strong id="summary-date">—</strong></div></div>
+        <div class="summary-detail"><span id="summary-time-icon">🌙</span><div><small>Время</small><strong id="summary-time">—</strong></div></div>
+        <p class="postcard-footer">Оденься красиво (то есть как всегда) ♡</p>
+      </article>
+      <p class="micro-copy postcard-disclaimer">Это пока план — детали можно обсудить вместе.</p>
+      <div class="sticky-actions postcard-actions">
+        <button class="button button-quiet" data-go="schedule">← Изменить</button>
+        <button class="button button-primary" id="confirm-button">Подтвердить выбор 💌</button>
+      </div>
+    </section>
+
+    <section class="screen success-screen" data-screen="success" aria-labelledby="success-title">
+      <div class="success-orbit" aria-hidden="true"><span>🌷</span><span>💗</span><span>✨</span><span>💌</span></div>
+      <div class="success-heart" aria-hidden="true">♡</div>
+      <span class="eyebrow">план почти в кармане</span>
+      <h1 id="success-title">Данные отправлены.<br>Уже бронирую столик...</h1>
+      <p class="lead">Жди меня с цветами ❤️</p>
+      <p id="send-status" class="send-status" aria-live="polite">Отправляем наш маленький план…</p>
+      <button class="button button-quiet" id="start-over">Начать сначала</button>
+    </section>
+  </main>
+  <footer class="site-footer">сделано с нежностью <span>♡</span></footer>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
