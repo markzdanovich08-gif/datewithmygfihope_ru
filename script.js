@@ -26,45 +26,40 @@
 
   $$("[data-go]").forEach(button => button.addEventListener("click", () => goTo(button.dataset.go)));
 
-  let yesTimer;
   function startQuestionTimer() {
-    clearTimeout(yesTimer);
     const yes = $("#yes-button");
     const note = $("#question-note");
     yes.classList.remove("visible");
     yes.disabled = true;
-    note.textContent = "Кнопка «Да» появится через 5 секунд ✨";
+    note.textContent = "Попробуй поймать кнопку «Нет» несколько раз 🙈";
     state.noMoves = 0;
     const no = $("#no-button");
     no.style.left = "0px"; no.style.top = "0px"; no.style.position = "relative";
-    yesTimer = setTimeout(() => {
-      yes.disabled = false;
-      yes.classList.add("visible");
-      note.textContent = "Если тебе хочется — нажимай «Да» 💗";
-    }, 5000);
   }
 
-  // The playful "No" button dodges a few times, then becomes clickable:
-  // a real "no" should always remain a valid choice.
+  // The playful "No" button dodges four times. Then "Yes" appears immediately.
+  // The "No" button remains available as a valid choice.
   const noButton = $("#no-button");
   function dodgeNo() {
     if (state.noMoves >= 4) return;
     const area = $("#question-actions").getBoundingClientRect();
-    const maxX = Math.max(40, Math.min(130, area.width / 2 - 50));
-    const maxY = 36;
+    const maxX = Math.max(30, Math.min(110, area.width * 0.22));
+    const maxY = Math.max(15, Math.min(45, area.height * 0.3));
     noButton.style.position = "relative";
     noButton.style.left = `${Math.round((Math.random() * 2 - 1) * maxX)}px`;
     noButton.style.top = `${Math.round((Math.random() * 2 - 1) * maxY)}px`;
     state.noMoves++;
     if (state.noMoves >= 4) {
-      $("#question-note").textContent = "Ладно, больше не убегаю 🙈 «Нет» тоже можно выбрать.";
       noButton.style.left = "0px"; noButton.style.top = "0px";
+      const yes = $("#yes-button");
+      yes.disabled = false;
+      yes.classList.add("visible");
+      $("#question-note").textContent = "Теперь можно выбрать «Да» или «Нет» — как тебе хочется 💗";
     }
   }
   noButton.addEventListener("pointerenter", dodgeNo);
   noButton.addEventListener("focus", () => { if (state.noMoves < 4) dodgeNo(); });
   noButton.addEventListener("click", () => {
-    clearTimeout(yesTimer);
     $("#question-note").textContent = "Спасибо, что честно сказала. Никакого давления 💗";
     noButton.textContent = "Поняла ♡";
     $("#yes-button").classList.remove("visible");
